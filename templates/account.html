@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+    {% include 'header.html' %}
+    <main>
+        <div class="container">
+            <h1 class="account-title">Account</h1>
+            <section class="account-section card">
+                <h2>Personal Information</h2>
+                <ul>
+                    <li>Name: {{ customer.name }}</li>
+                    <li>Email: {{ customer.email }}</li>
+                    <li>Phone: {{ customer.phone }}</li>
+                </ul>
+            </section>
+            <section class="bookings-section card">
+                <h2>Bookings</h2>
+                <ul>
+                    {% for booking in bookings %}
+                        <li>
+                            Room Number: {{ booking.room_number }}<br>
+                            Check-in Date: {{ booking.check_in_date.strftime('%Y-%m-%d') }}<br>
+                            Check-out Date: {{ booking.check_out_date.strftime('%Y-%m-%d') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="service-requests-section card">
+                <h2>Service Requests</h2>
+                <ul>
+                    {% for request in service_requests %}
+                        <li>
+                            Description: {{ request.description }}<br>
+                            Status: {{ request.status }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="dining-requests-section card">
+                <h2>Dining Requests</h2>
+                <ul>
+                    {% for request in dining_requests %}
+                        <li>
+                            Number of Guests: {{ request.number_of_guests }}<br>
+                            Check-in Date: {{ request.check_in_date.strftime('%Y-%m-%d') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Customer Service - Luxury Spa</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/services-page.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/spa-page.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+      <h1 style="text-align: center;">Luxury Spa</h1>
+      <section class="spa">
+        <div class="spa-container">
+          <div class="spa-description">
+            <p>
+              Welcome to our Luxury Spa, where you can escape the stress of
+              everyday life and rejuvenate your body and mind. Our professional
+              therapists provide a range of treatments and therapies, including:
+            </p>
+            <!-- text-align left and centralize-->
+            <ul style="text-align: left; margin-left: 0; padding-left: 0;">
+              <li>Manicures</li>
+              <li>Pedicures</li>
+              <li>Waxing</li>
+              <li>Body scrubs</li>
+              <li>Body polishes</li>
+              <li>Body masks</li>
+              <li>Hot stone therapy</li>
+              <li>Reflexology</li>
+              <li>Massages</li>
+              <li>Facials</li>
+              <li>Body wraps</li>
+              <li>Aromatherapy</li>
+              <li>Hydrotherapy</li>
+            </ul>
+            <p>
+              Our spa facilities include private treatment rooms, a sauna, a
+              steam room, and a relaxation lounge. We use only the finest
+              natural and organic products to ensure the best experience for our
+              guests. To book a treatment, please contact our front desk or
+              visit the Contact Us page.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

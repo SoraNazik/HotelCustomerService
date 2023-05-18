@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Customer Service - Book</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/book.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/rooms-page.css') }}"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+      <section class="room-details">
+        <h1>Room Booking for {{ room_name }}</h1>
+        <img src="{{ room_image_path }}" alt="{{ room_name }}" />
+        <div>
+          <p class="room-description">{{ room_description }}</p>
+          <p class="room-price">Price: {{ price }} $ per day</p>
+        </div>
+      </section>
+      <section class="book">
+        <form id="booking-form">
+          <label for="check-in">Check-in:</label>
+          <input
+            type="date"
+            id="check-in"
+            name="check-in"
+            required
+            data-dashlane-rid="e6ee4c239bff2128"
+            data-form-type="date"
+          />
+          <br />
+          <label for="check-out">Check-out:</label>
+          <input
+            type="date"
+            id="check-out"
+            name="check-out"
+            required
+            data-dashlane-rid="e6ee4c239bff2128"
+            data-form-type="date"
+          />
+          <br />
+          <p id="price-estimate">Price Estimate: $<span id="price"></span></p>
+          <button type="submit">Place Order</button>
+        </form>
+        <p id="booking-message">{{ booking_message }}</p>
+        <p id="booked-dates">Booked Dates:</p>
+        <ul id="booked-dates-list"></ul>
+      </section>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+  <script>
+    $(document).ready(function() {
+      const roomId = {{ room_id }};
+      let pricePerDay;
+
+      // Fetch available dates, booked dates, and prices for the room
+      $.getJSON(`/get_available_dates?id=${roomId}`, function(data) {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          const availableDates = data.available_dates;
+          pricePerDay = data.price;
+
+          // Set the min and max attributes for the date inputs based on available dates
+          $('#check-in').attr('min', availableDates[0]).attr('max', availableDates[availableDates.length - 1]);
+          $('#check-out').attr('min', availableDates[0]).attr('max', availableDates[availableDates.length - 1]);
+
+          // Disable specific dates in the date picker
+          availableDates.forEach(function(date) {
+            $('#check-in, #check-out').each(function() {
+              $(this).find(`option[value="${date}"]`).prop('disabled', true);
+            });
+          });
+        }
+      });
+
+      // Fetch booked dates for the room
+      $.getJSON(`/get_booked_dates?id=${roomId}`, function(data) {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          const bookedDates = data.booked_dates;
+
+          // Show booked dates
+          bookedDates.forEach(function(booking) {
+            const checkInDate = new Date(booking.check_in_date);
+
+            const checkOutDate = new Date(booking.check_out_date);
+
+            // Disable booked dates in the date picker
+            const disableDates = getDatesBetween(checkInDate, checkOutDate);
+            disableDates.forEach(function(date) {
+              $('#check-in, #check-out').each(function() {
+                $(this).find(`option[value="${date}"]`).prop('disabled', true);
+              });
+            });
+
+            // Show booked dates in the list
+            $('#booked-dates-list').append('<li>' + booking.check_in_date + ' - ' + booking.check_out_date + '</li>');
+          });
+        }
+      });
+
+      // Update the price estimate when check-in or check-out date changes
+      $('#check-in, #check-out').on('change', function() {
+        const checkInDate = new Date($('#check-in').val());
+        const checkOutDate = new Date($('#check-out').val());
+        const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+
+        if (days > 0) {
+          $('#price').text(pricePerDay * days);
+        } else {
+          $('#price').text('0');
+        }
+      });
+
+      // Handle the form submission
+      $('#booking-form').on('submit', function(event) {
+        event.preventDefault();
+
+        const checkInDate = $('#check-in').val();
+        const checkOutDate = $('#check-out').val();
+
+        if (!checkInDate || !checkOutDate) {
+          alert('Please select valid check-in and check-out dates.');
+          return;
+        }
+
+        // You can add any additional form validation here
+
+        // If everything is valid, submit the form data to your server
+        // You will need to create a new route in your Flask application to handle the form submission
+        $.post('/place_order', {
+          room_id: roomId,
+          check_in_date: checkInDate,
+          check_out_date: checkOutDate
+        }, function(response) {
+          if (response.error) {
+            alert(response.error);
+          } else {
+            // Display a success message or redirect the user to another page
+            alert('Booking placed successfully!');
+          }
+        });
+      });
+    });
+
+    // Helper function to get all dates between two dates (inclusive)
+    function getDatesBetween(startDate, endDate) {
+      const dates = [];
+      const currentDate = new Date(startDate);
+
+      while (currentDate <= endDate) {
+        dates.push(currentDate.toISOString().split('T')[0]);
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      return dates;
+    }
+  </script>
+</html>

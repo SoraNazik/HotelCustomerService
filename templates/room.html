@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Customer Service - Room</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/rooms-page.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+      <section class="room-details">
+        <h1>{{ room_name }}</h1>
+        <img src="{{ room_image_path }}" alt="{{ room_name }}" />
+        <div>
+          <p class="room-description">{{ room_description }}</p>
+          <p class="room-price">Price: {{ price }} $ per day</p>
+        </div>
+        <a href="/book?id={{ room_id }}" class="book-button">Book Now</a>
+      </section>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

@@ -1,0 +1,16 @@
+.fitness-center {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .fitness-center h1,
+  .fitness-center h2 {
+    text-align: center;
+  }
+  
+  .equipment-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+  

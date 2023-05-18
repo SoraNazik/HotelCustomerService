@@ -1,0 +1,22 @@
+.spa {
+    text-align: center;
+  }
+  
+  .spa-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .spa-container img {
+    width: 30%;
+    max-width: 240px;
+    height: auto;
+    margin: 1rem;
+  }
+  
+  .spa-description {
+    max-width: 600px;
+    margin: 1rem;
+  }

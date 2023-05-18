@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Customer Service - Fitness Center</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/services-page.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/fitness-center-page.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+      <section class="fitness-center">
+        <h1>Fitness Center</h1>
+        <p>
+          Our state-of-the-art fitness center is designed to help you maintain
+          your fitness routine during your stay. Whether you're a seasoned
+          athlete or just starting out, our fitness center offers a variety of
+          options to suit your needs.
+        </p>
+
+        <h2>Equipment</h2>
+        <ul class="equipment-list">
+          <li>Treadmills</li>
+          <li>Ellipticals</li>
+          <li>Exercise bikes</li>
+          <li>Free weights</li>
+          <li>Resistance machines</li>
+          <li>Functional training equipment</li>
+        </ul>
+
+        <h2>Group Exercise Classes</h2>
+        <p>
+          We offer a range of group exercise classes led by certified
+          instructors. Our classes include yoga, Pilates, Zumba, spinning, and
+          more. Check our schedule for class times and availability.
+        </p>
+
+        <h2>Personal Training</h2>
+        <p>
+          Our certified personal trainers are available to help you create a
+          customized workout plan and provide guidance on proper exercise
+          techniques. Personal training sessions can be booked at the front
+          desk.
+        </p>
+      </section>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

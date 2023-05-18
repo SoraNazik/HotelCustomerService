@@ -1,0 +1,35 @@
+.services {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .service-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .service-card {
+    background-color: var(--tertiary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    width: 300px;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .service-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .service-link {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    height: 100%;
+  }
+  

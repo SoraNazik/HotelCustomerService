@@ -1,0 +1,36 @@
+.fine-dining {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .dining-image {
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+  }
+  
+  #reservation-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  #reservation-form input {
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    flex: 0 1 calc(50% - 1rem);
+    border: 1px solid var(--secondary-color);
+    padding: 0.5rem;
+  }
+  
+  #reservation-form button {
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    flex: 0 1 calc(50% - 1rem);
+    background-color: var(--primary-color);
+    color: #ffffff;
+    cursor: pointer;
+  }
+  

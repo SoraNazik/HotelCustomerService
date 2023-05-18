@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Customer Service - Fine Dining</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/services-page.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/fine-dining-page.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+      <section class="fine-dining">
+        <h1>Fine Dining</h1>
+        <img
+          src="{{ url_for('static', filename='images/restaraunt.jpg') }}"
+          alt="Fine Dining Restaurant"
+          class="dining-image"
+        />
+        <p>
+          At our fine dining restaurant, we strive to provide a memorable
+          culinary experience for our guests. Our menu features a diverse
+          selection of gourmet dishes, prepared by our skilled chefs using only
+          the finest locally-sourced ingredients. We also offer an extensive
+          wine list, carefully curated to complement our menu. Join us for an
+          unforgettable evening of fine dining in a sophisticated and elegant
+          atmosphere.
+        </p>
+        <h2>Opening Hours</h2>
+        <p>Monday - Sunday: 6:00 PM - 10:00 PM</p>
+        <h2>Reservations</h2>
+        <p>
+          We recommend making a reservation to ensure a table is available for
+          your preferred dining time. To make a reservation, please call us at
+          +1 (555) 123-4567 or use our online reservation system below:
+        </p>
+
+        {% if current_user.is_authenticated %} 
+        <div id="reservation-form">
+        <input
+            type="datetime-local"
+            id="datetime"
+            placeholder="Date and Time"
+          />
+          <input type="number" id="guests" placeholder="Number of Guests" />
+          <button id="submit" onclick="makeReservationLoggedIn('{{ current_user.name }}', '{{ current_user.phone }}', '{{ current_user.email }}')">
+            Make a Reservation
+          </button>
+        </div>
+        {% else %}
+        <div id="reservation-form" style="flex-wrap: wrap;">
+          <input type="text" id="name" placeholder="Name" />
+          <input type="text" id="phone" placeholder="Phone Number" />
+          <input type="email" id="email" placeholder="Email" />
+          <input
+            type="datetime-local"
+            id="datetime"
+            placeholder="Date and Time"
+          />
+          <input type="number" id="guests" placeholder="Number of Guests" />
+          <button id="submit" onclick="makeReservation()">
+            Make a Reservation
+          </button>
+        </div>
+        {% endif %}
+      </section>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

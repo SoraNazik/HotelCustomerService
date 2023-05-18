@@ -1,0 +1,39 @@
+        /* Contact Us page styles */
+        .contact {
+            text-align: center;
+        }
+        
+        #contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: var(--tertiary-color);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: var(--secondary-color);
+        }

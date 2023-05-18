@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Customer Service - Services</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='stylesheets/services-page.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+      <!-- make it centralized -->
+      <h1 style="text-align: center">Our Services</h1>
+      <section class="services">
+        <div class="service-card">
+          <a href="services/spa" class="service-link">
+            <img
+              src="{{ url_for('static', filename='images/spa.webp') }}"
+              alt="Luxury Spa"
+            />
+            <h2>Luxury Spa</h2>
+            <p>
+              Our luxury spa offers a relaxing experience with a variety of
+              treatments, including massages, facials, and body wraps to
+              rejuvenate your body and mind.
+            </p>
+          </a>
+        </div>
+        <div class="service-card">
+          <a href="services/fitness-center" class="service-link">
+            <img
+              src="{{ url_for('static', filename='images/fitness-center.webp') }}"
+              alt="Fitness Center"
+            />
+            <h2>Fitness Center</h2>
+            <p>
+              Our fully-equipped fitness center features state-of-the-art
+              equipment, personal trainers, and group exercise classes to help
+              you maintain your fitness routine during your stay.
+            </p>
+          </a>
+        </div>
+        <div class="service-card">
+          <a href="services/fine-dining" class="service-link">
+            <img
+              src="{{ url_for('static', filename='images/fine-dining.jpg') }}"
+              alt="Fine Dining"
+            />
+            <h2>Fine Dining</h2>
+            <p>
+              Experience fine dining at our on-site restaurant, serving a
+              diverse menu of gourmet cuisine prepared by our skilled chefs,
+              using locally-sourced ingredients.
+            </p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

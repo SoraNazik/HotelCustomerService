@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/general.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/header.css') }}" />
+<script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+<script>
+    function toggleLoginForm() {
+      var screenWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+      if (screenWidth <= 767) {
+        window.location.href = "{{ url_for('login') }}";
+      } else {
+        var loginForm = document.getElementById("login-form");
+        loginForm.classList.toggle("active");
+      }
+    }
+  </script>
+<header>
+  <nav>
+    <!-- Navigation links -->
+    <ul class="navigation-links">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('services') }}">Services</a></li>
+      <li><a href="{{ url_for('rooms') }}">Rooms</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+    </ul>
+    <ul class="user-links">
+      {% if current_user.is_authenticated %}
+      <li>
+        <a href="{{ url_for('account') }}">Welcome, {{ current_user.name }}</a>
+      </li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% else %}
+      <li><a href="#" onclick="toggleLoginForm()">Login</a></li>
+      <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <div id="login-form" class="login-form">
+    <form action="{{ url_for('login') }}" method="POST">
+      <div class="form-group">
+        <label for="username">Email or Phone:</label>
+        <input type="text" id="login_username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="login_password" name="login_password" required />
+      </div>
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+</header>
